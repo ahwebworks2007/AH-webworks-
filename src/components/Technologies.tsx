@@ -1,6 +1,8 @@
-import { PORTFOLIO_DATA } from '@/src/data/portfolioData';
+import { usePortfolio } from '@/src/context/PortfolioContext';
 
 export const Technologies = () => {
+  const { data } = usePortfolio();
+
   return (
     <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-zinc-950/90 relative border-t border-zinc-900">
       <div className="max-w-7xl mx-auto">
@@ -19,7 +21,7 @@ export const Technologies = () => {
 
         {/* Tech Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {PORTFOLIO_DATA.technologies.map((tech) => (
+          {(data.technologies || []).map((tech) => (
             <div
               key={tech.name}
               className="p-5 rounded-xl bg-zinc-900/60 border border-zinc-800/90 hover:border-zinc-700 hover:bg-zinc-900 transition-all duration-200 flex flex-col justify-between"
@@ -49,3 +51,4 @@ export const Technologies = () => {
     </section>
   );
 };
+

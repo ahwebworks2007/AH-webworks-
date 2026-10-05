@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { ArrowRight, CheckCircle2, ChevronRight } from 'lucide-react';
-import { PORTFOLIO_DATA } from '@/src/data/portfolioData';
+import { usePortfolio } from '@/src/context/PortfolioContext';
 
 export const Process = () => {
+  const { data } = usePortfolio();
   const [activeStep, setActiveStep] = useState(0);
+  const processList = data.process || [];
 
   return (
     <section id="process" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-zinc-950 relative border-t border-zinc-900">
@@ -23,7 +25,7 @@ export const Process = () => {
 
         {/* Steps Horizontal/Grid Timeline */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 lg:gap-6">
-          {PORTFOLIO_DATA.process.map((step, idx) => {
+          {processList.map((step, idx) => {
             const isSelected = activeStep === idx;
             return (
               <div
@@ -47,7 +49,7 @@ export const Process = () => {
                     >
                       STEP {step.step}
                     </span>
-                    {idx < PORTFOLIO_DATA.process.length - 1 && (
+                    {idx < processList.length - 1 && (
                       <ChevronRight className="hidden md:block w-4 h-4 text-zinc-600" />
                     )}
                   </div>
@@ -97,3 +99,4 @@ export const Process = () => {
     </section>
   );
 };
+
