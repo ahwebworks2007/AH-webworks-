@@ -1,0 +1,158 @@
+{
+  "entities": {
+    "PortfolioConfig": {
+      "title": "PortfolioConfig",
+      "description": "Global portfolio configuration including brand, contact, services, founders, and projects.",
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "object",
+          "description": "Brand headlines, subheadlines, and studio information."
+        },
+        "contact": {
+          "type": "object",
+          "description": "Official contact channels, phone, social links, and availability."
+        },
+        "founders": {
+          "type": "array",
+          "description": "Profiles of studio co-founders and key team members."
+        },
+        "services": {
+          "type": "array",
+          "description": "Studio service offerings and capabilities."
+        },
+        "projects": {
+          "type": "array",
+          "description": "Portfolio case studies, website showcases, and links."
+        },
+        "technologies": {
+          "type": "array",
+          "description": "Verified development tools and technology stack items."
+        },
+        "process": {
+          "type": "array",
+          "description": "Client workflow step-by-step roadmap."
+        },
+        "whyUs": {
+          "type": "array",
+          "description": "Value proposition and studio standards."
+        },
+        "showreel": {
+          "type": "object",
+          "description": "Interactive showcase reel and featured video / previews."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO timestamp when the config was last updated."
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "UID or email of the admin who updated the configuration."
+        }
+      },
+      "required": ["brand", "contact", "founders", "services", "projects"]
+    },
+    "ClientInquiry": {
+      "title": "ClientInquiry",
+      "description": "Inbound project briefs and contact requests submitted by prospective clients.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the inquiry."
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Client or contact person name."
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Client contact email address."
+        },
+        "phone": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "Client contact phone or WhatsApp number."
+        },
+        "businessName": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Company, restaurant, or brand name."
+        },
+        "projectType": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Requested service or project category."
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Client requirements, vision, or project details."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["new", "contacted", "in_progress", "closed"],
+          "description": "Current lifecycle status of the inquiry."
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Internal admin notes on the lead."
+        },
+        "date": {
+          "type": "string",
+          "description": "Readable submission timestamp."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp."
+        }
+      },
+      "required": ["name", "email", "projectType", "message", "status"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized studio administrator record.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "User identifier."
+        },
+        "email": {
+          "type": "string",
+          "description": "Admin email address."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin", "superadmin"],
+          "description": "Admin authorization role."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Record creation timestamp."
+        }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/portfolio/{configId}": {
+      "schema": "PortfolioConfig",
+      "description": "Collection storing the active studio website configuration and content."
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": "ClientInquiry",
+      "description": "Collection of all inbound client project inquiries."
+    },
+    "/admins/{adminUid}": {
+      "schema": "AdminUser",
+      "description": "Collection of authorized admin users."
+    }
+  }
+}

@@ -1,8 +1,9 @@
 {
-  "name": "AH PRODUCTIONS | Web Development Studio",
+  "name": "Remix AH PRODUCTIONS | Web Development Studio",
   "description": "AH PRODUCTIONS creates modern, responsive and professional websites for businesses, brands and startups.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
   ]
 }
+

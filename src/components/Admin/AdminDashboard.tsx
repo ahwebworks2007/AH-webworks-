@@ -79,6 +79,9 @@ export const AdminDashboard: React.FC = () => {
     logoutAdmin,
     changeAdminPassword,
     resetAdminPassword,
+    syncStatus,
+    lastSyncedAt,
+    adminUser,
   } = usePortfolio();
 
   const [activeTab, setActiveTab] = useState<AdminTab>('overview');
@@ -648,6 +651,31 @@ export const AdminDashboard: React.FC = () => {
             </span>
             <span className="text-zinc-600 hidden sm:inline">/</span>
             <span className="text-amber-400 font-semibold uppercase">{activeTab}</span>
+          </div>
+
+          {/* Firebase Connection Status */}
+          <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded-full bg-zinc-950 border border-zinc-800 text-[11px] font-mono">
+            <span
+              className={`w-1.5 h-1.5 rounded-full ${
+                syncStatus === 'connected'
+                  ? 'bg-emerald-400 animate-pulse'
+                  : syncStatus === 'syncing'
+                  ? 'bg-amber-400 animate-spin'
+                  : 'bg-zinc-500'
+              }`}
+            />
+            <span className="text-zinc-400">
+              {syncStatus === 'connected'
+                ? 'Firestore Live'
+                : syncStatus === 'syncing'
+                ? 'Syncing to Cloud...'
+                : 'Offline Cache'}
+            </span>
+            {adminUser?.email && (
+              <span className="text-amber-400/90 pl-1 border-l border-zinc-800 truncate max-w-[140px]">
+                {adminUser.email}
+              </span>
+            )}
           </div>
         </div>
 
