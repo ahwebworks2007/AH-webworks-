@@ -124,14 +124,14 @@ export const Footer = ({ onOpenAdmin }: FooterProps) => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500">
-          <div className="flex items-center gap-2">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500 text-center sm:text-left">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
             <span>© 2026 {data.brand.name}. All rights reserved.</span>
             {onOpenAdmin && (
               <button
                 type="button"
                 onClick={onOpenAdmin}
-                className="opacity-20 hover:opacity-80 transition-opacity text-[10px] text-zinc-600 hover:text-zinc-400 p-0.5"
+                className="opacity-20 hover:opacity-80 transition-opacity text-[10px] text-zinc-600 hover:text-zinc-400 p-0.5 cursor-pointer"
                 title="Portal"
                 aria-label="Portal Access"
               >

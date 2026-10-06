@@ -139,16 +139,16 @@ export const Contact = ({ preselectedService }: ContactProps) => {
               </a>
 
               {/* Email Card with Copy button */}
-              <div className="p-5 rounded-xl bg-zinc-900/60 border border-zinc-800 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 rounded-lg bg-zinc-800 border border-zinc-700 text-amber-400">
-                    <Mail className="w-5 h-5" />
+              <div className="p-4 sm:p-5 rounded-xl bg-zinc-900/60 border border-zinc-800 flex items-center justify-between gap-3 min-w-0">
+                <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
+                  <div className="p-2.5 sm:p-3 rounded-lg bg-zinc-800 border border-zinc-700 text-amber-400 shrink-0">
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <div>
-                    <div className="text-xs font-mono text-zinc-500 uppercase">Official Email</div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[11px] sm:text-xs font-mono text-zinc-500 uppercase">Official Email</div>
                     <a
                       href={`mailto:${data.contact.email}`}
-                      className="text-sm font-semibold text-white hover:text-amber-300 transition-colors"
+                      className="text-xs sm:text-sm font-semibold text-white hover:text-amber-300 transition-colors truncate block"
                     >
                       {data.contact.email}
                     </a>
@@ -157,7 +157,7 @@ export const Contact = ({ preselectedService }: ContactProps) => {
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-colors"
+                  className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-colors shrink-0"
                   title="Copy email address"
                   aria-label="Copy email address"
                 >

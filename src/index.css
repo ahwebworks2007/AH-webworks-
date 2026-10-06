@@ -7,16 +7,30 @@
     --font-mono: 'JetBrains Mono', monospace;
   }
 
+  html {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   body {
     font-family: var(--font-body);
     background-color: #09090b;
     color: #f4f4f5;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  #root {
+    max-width: 100%;
     overflow-x: hidden;
   }
 
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   .font-mono-data {

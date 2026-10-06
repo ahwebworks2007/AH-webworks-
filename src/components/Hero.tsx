@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight, Code2, Terminal } from 'lucide-react';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { usePortfolio } from '@/src/context/PortfolioContext';
 
 interface HeroProps {
@@ -12,51 +12,40 @@ export const Hero = ({ onViewWork, onStartProject }: HeroProps) => {
   return (
     <section
       id="home"
-      className="relative min-h-[92vh] flex flex-col justify-center items-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-zinc-950"
+      className="relative min-h-[90vh] sm:min-h-[92vh] flex flex-col justify-center items-center pt-24 sm:pt-28 pb-14 sm:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-zinc-950 w-full max-w-full"
     >
       {/* Background architectural grid */}
       <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
 
-      {/* Ambient subtle light glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-72 h-72 bg-blue-600/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute top-20 right-10 w-80 h-80 bg-zinc-600/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Ambient subtle light glows - constrained to avoid horizontal overflow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 sm:w-[550px] h-72 sm:h-[350px] bg-amber-500/10 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none max-w-full" />
+      <div className="absolute bottom-10 left-10 w-48 sm:w-72 h-48 sm:h-72 bg-blue-600/5 rounded-full blur-[80px] sm:blur-[100px] pointer-events-none max-w-full" />
+      <div className="absolute top-20 right-10 w-48 sm:w-80 h-48 sm:h-80 bg-zinc-600/10 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none max-w-full" />
 
-      {/* Floating UI micro-accents */}
-      <div className="hidden lg:flex items-center gap-2 absolute top-32 left-12 px-3 py-1.5 rounded-md bg-zinc-900/80 border border-zinc-800 text-xs text-zinc-400 font-mono backdrop-blur-sm shadow-xl shadow-black/40 animate-pulse">
-        <Terminal className="w-3.5 h-3.5 text-amber-400" />
-        <span>clean_architecture.ts</span>
-      </div>
-
-      <div className="hidden lg:flex items-center gap-2 absolute bottom-28 right-12 px-3 py-1.5 rounded-md bg-zinc-900/80 border border-zinc-800 text-xs text-zinc-400 font-mono backdrop-blur-sm shadow-xl shadow-black/40">
-        <Code2 className="w-3.5 h-3.5 text-emerald-400" />
-        <span>production_ready: true</span>
-      </div>
-
-      <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
-        {/* Brand studio moniker */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs uppercase tracking-widest text-zinc-300 font-medium mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-          <span>{data.brand.studioName}</span>
-          <span className="text-zinc-600">·</span>
-          <span className="text-zinc-400 lowercase font-mono">web development studio</span>
+      <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center w-full min-w-0">
+        {/* Brand studio moniker with responsive overflow protection */}
+        <div className="inline-flex max-w-full items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800 text-[11px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-zinc-300 font-medium mb-6">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
+          <span className="truncate">{data.brand.studioName}</span>
+          <span className="text-zinc-600 hidden sm:inline">·</span>
+          <span className="text-zinc-400 lowercase font-mono hidden sm:inline">web development studio</span>
         </div>
 
-        {/* Massive headline with editorial balance */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-extrabold text-white tracking-tight leading-[1.05] text-balance max-w-4xl">
+        {/* Massive headline with fluid responsive scaling */}
+        <h1 className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-extrabold text-white tracking-tight leading-[1.1] sm:leading-[1.05] text-balance max-w-4xl break-words w-full">
           WE BUILD <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-500">DIGITAL</span> EXPERIENCES.
         </h1>
 
         {/* Supporting description */}
-        <p className="mt-6 text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl font-normal leading-relaxed text-balance">
+        <p className="mt-5 sm:mt-6 text-sm sm:text-lg md:text-xl text-zinc-400 max-w-2xl font-normal leading-relaxed text-balance px-2 sm:px-0">
           {data.brand.subheadline}
         </p>
 
-        {/* Two prominent action buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+        {/* Action buttons fitting completely on small mobile screens */}
+        <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full sm:w-auto max-w-xs sm:max-w-none">
           <button
             onClick={onViewWork}
-            className="w-full sm:w-auto px-8 py-4 text-sm font-semibold tracking-wide uppercase text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-lg shadow-lg shadow-amber-400/20 transition-all duration-200 flex items-center justify-center gap-2 active:scale-95 group"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold tracking-wide uppercase text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-lg shadow-lg shadow-amber-400/20 transition-all duration-200 flex items-center justify-center gap-2 active:scale-95 group cursor-pointer whitespace-nowrap"
           >
             <span>VIEW OUR WORK</span>
             <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
@@ -64,7 +53,7 @@ export const Hero = ({ onViewWork, onStartProject }: HeroProps) => {
 
           <button
             onClick={onStartProject}
-            className="w-full sm:w-auto px-8 py-4 text-sm font-semibold tracking-wide uppercase text-white bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 active:scale-95"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold tracking-wide uppercase text-white bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 active:scale-95 cursor-pointer whitespace-nowrap"
           >
             <span>START A PROJECT</span>
             <ArrowUpRight className="w-4 h-4 text-amber-400" />
@@ -72,24 +61,24 @@ export const Hero = ({ onViewWork, onStartProject }: HeroProps) => {
         </div>
 
         {/* Editorial trust markers */}
-        <div className="mt-12 pt-8 border-t border-zinc-900/80 grid grid-cols-2 sm:grid-cols-4 gap-6 text-left w-full max-w-3xl">
-          <div>
-            <div className="text-xs uppercase tracking-wider text-zinc-500 font-mono">FOUNDERS</div>
-            <div className="text-sm font-medium text-zinc-200 mt-0.5">Hamdan & Ahad</div>
+        <div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-zinc-900/80 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 text-left w-full max-w-3xl">
+          <div className="min-w-0">
+            <div className="text-[10px] sm:text-xs uppercase tracking-wider text-zinc-500 font-mono">FOUNDERS</div>
+            <div className="text-xs sm:text-sm font-medium text-zinc-200 mt-0.5 truncate">Hamdan & Ahad</div>
           </div>
-          <div>
-            <div className="text-xs uppercase tracking-wider text-zinc-500 font-mono">FOCUS</div>
-            <div className="text-sm font-medium text-zinc-200 mt-0.5">Modern Web & E-Com</div>
+          <div className="min-w-0">
+            <div className="text-[10px] sm:text-xs uppercase tracking-wider text-zinc-500 font-mono">FOCUS</div>
+            <div className="text-xs sm:text-sm font-medium text-zinc-200 mt-0.5 truncate">Modern Web & E-Com</div>
           </div>
-          <div>
-            <div className="text-xs uppercase tracking-wider text-zinc-500 font-mono">DELIVERY</div>
-            <div className="text-sm font-medium text-zinc-200 mt-0.5">Custom & Responsive</div>
+          <div className="min-w-0">
+            <div className="text-[10px] sm:text-xs uppercase tracking-wider text-zinc-500 font-mono">DELIVERY</div>
+            <div className="text-xs sm:text-sm font-medium text-zinc-200 mt-0.5 truncate">Custom & Responsive</div>
           </div>
-          <div>
-            <div className="text-xs uppercase tracking-wider text-zinc-500 font-mono">STATUS</div>
-            <div className="text-sm font-medium text-emerald-400 flex items-center gap-1.5 mt-0.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{data.contact.availability || 'Available for Projects'}</span>
+          <div className="min-w-0">
+            <div className="text-[10px] sm:text-xs uppercase tracking-wider text-zinc-500 font-mono">STATUS</div>
+            <div className="text-xs sm:text-sm font-medium text-emerald-400 flex items-center gap-1.5 mt-0.5 min-w-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+              <span className="truncate">{data.contact.availability || 'Available for Projects'}</span>
             </div>
           </div>
         </div>
@@ -98,7 +87,7 @@ export const Hero = ({ onViewWork, onStartProject }: HeroProps) => {
       {/* Scroll indicator */}
       <a
         href="#about"
-        className="mt-14 inline-flex flex-col items-center gap-2 text-zinc-500 hover:text-zinc-300 transition-colors text-xs font-mono group"
+        className="mt-10 sm:mt-14 inline-flex flex-col items-center gap-2 text-zinc-500 hover:text-zinc-300 transition-colors text-xs font-mono group"
         aria-label="Scroll to About section"
       >
         <span className="tracking-widest uppercase text-[10px]">Scroll Down</span>

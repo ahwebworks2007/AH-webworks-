@@ -39,8 +39,8 @@ export const About = () => {
             >
               <div>
                 {/* Profile Top: Avatar + Moniker */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pb-6 border-b border-zinc-800/80">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden border border-zinc-700/80 bg-zinc-800 shrink-0">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 pb-6 border-b border-zinc-800/80 min-w-0">
+                  <div className="relative w-16 h-16 sm:w-24 sm:h-24 rounded-xl overflow-hidden border border-zinc-700/80 bg-zinc-800 shrink-0">
                     <img
                       src={founder.avatar || getInitialsSvg(founder.name)}
                       alt={founder.name}
@@ -57,30 +57,30 @@ export const About = () => {
                       <span className="text-zinc-400">CORE DEVELOPER</span>
                     </div>
 
-                    <h3 className="mt-1 text-xl sm:text-2xl font-display font-bold text-white tracking-tight truncate">
+                    <h3 className="mt-1 text-lg sm:text-2xl font-display font-bold text-white tracking-tight truncate">
                       {founder.name}
                     </h3>
-                    <p className="text-sm font-medium text-zinc-400 mt-0.5">
+                    <p className="text-xs sm:text-sm font-medium text-zinc-400 mt-0.5 truncate">
                       {founder.role}
                     </p>
                   </div>
                 </div>
 
                 {/* Bio description */}
-                <p className="mt-6 text-sm sm:text-base text-zinc-300 leading-relaxed">
+                <p className="mt-5 sm:mt-6 text-sm sm:text-base text-zinc-300 leading-relaxed">
                   {founder.bio}
                 </p>
 
                 {/* Core Focus Areas - Unboxed Clean Typography */}
-                <div className="mt-6 pt-6 border-t border-zinc-800/60">
-                  <div className="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
+                <div className="mt-5 sm:mt-6 pt-5 sm:pt-6 border-t border-zinc-800/60">
+                  <div className="text-[11px] sm:text-xs font-mono text-zinc-500 uppercase tracking-wider mb-3">
                     CORE FOCUS & EXPERTISE
                   </div>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-zinc-300">
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-zinc-300">
                     {founder.focus.map((item) => (
-                      <li key={item} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80" />
-                        <span>{item}</span>
+                      <li key={item} className="flex items-center gap-2 min-w-0">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80 shrink-0" />
+                        <span className="truncate">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -88,8 +88,8 @@ export const About = () => {
               </div>
 
               {/* Founder Footer Links */}
-              <div className="mt-8 pt-6 border-t border-zinc-800/60 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-zinc-400">
-                <div className="flex flex-wrap items-center gap-4">
+              <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-zinc-800/60 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-zinc-400">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                   {/* GitHub Link */}
                   {founder.github && (
                     <a

@@ -161,8 +161,8 @@ export const Showreel = () => {
               </div>
             ) : (
               /* Mobile Device Frame */
-              <div className="w-[320px] sm:w-[360px] rounded-3xl overflow-hidden border-4 border-zinc-700 bg-zinc-950 shadow-2xl p-2 transition-all duration-500">
-                <div className="w-20 h-4 bg-zinc-800 rounded-full mx-auto mb-2" />
+              <div className="w-full max-w-[270px] xs:max-w-[320px] sm:max-w-[360px] rounded-3xl overflow-hidden border-4 border-zinc-700 bg-zinc-950 shadow-2xl p-2 transition-all duration-500">
+                <div className="w-16 xs:w-20 h-3.5 xs:h-4 bg-zinc-800 rounded-full mx-auto mb-2" />
                 <div className="relative aspect-[9/16] rounded-2xl overflow-hidden bg-zinc-900">
                   <img
                     src={currentShowcase.image}

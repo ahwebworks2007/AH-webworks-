@@ -94,14 +94,14 @@ function PortfolioApp() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col selection:bg-amber-400 selection:text-black">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-zinc-950 text-zinc-100 flex flex-col selection:bg-amber-400 selection:text-black">
       {/* Top Navigation Bar */}
       <Navbar
         onStartProject={handleStartProject}
         onOpenAdmin={handleOpenAdmin}
       />
 
-      <main className="flex-grow">
+      <main className="flex-grow w-full max-w-full overflow-x-hidden min-w-0">
         {/* Hero Section */}
         <Hero onViewWork={handleViewWork} onStartProject={handleStartProject} />
 
