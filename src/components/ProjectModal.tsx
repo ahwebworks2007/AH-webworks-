@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { X, ExternalLink, Github, CheckCircle, ArrowRight, Layers, Smartphone, Laptop } from 'lucide-react';
 import { Project } from '@/src/data/portfolioData';
+import { InteractiveButton } from './ui/InteractiveButton';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -99,26 +100,37 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
 
           {/* Quick Actions & Live URL */}
           <div className="flex flex-wrap items-center gap-4 pt-2 pb-4 border-b border-zinc-800">
-            <a
+            <InteractiveButton
+              as="a"
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-colors shadow-lg shadow-amber-400/20"
+              magnetic={true}
+              magneticStrength={0.15}
+              ripple={true}
+              rippleVariant="dark"
+              glowEffect={true}
+              className="inline-flex items-center gap-2 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-all duration-200 shadow-lg shadow-amber-400/20 hover:shadow-xl hover:shadow-amber-400/30 hover:-translate-y-0.5 cursor-pointer"
             >
               <span>VISIT LIVE WEBSITE</span>
               <ExternalLink className="w-4 h-4" />
-            </a>
+            </InteractiveButton>
 
             {project.githubUrl && (
-              <a
+              <InteractiveButton
+                as="a"
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-200 bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors border border-zinc-700"
+                magnetic={true}
+                magneticStrength={0.15}
+                ripple={true}
+                rippleVariant="amber"
+                className="inline-flex items-center gap-2 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-200 bg-zinc-800 hover:bg-zinc-700 hover:text-white rounded-lg transition-all duration-200 border border-zinc-700 hover:border-zinc-600 hover:shadow-md hover:shadow-zinc-900/50 hover:-translate-y-0.5 cursor-pointer"
               >
                 <Github className="w-4 h-4" />
                 <span>VIEW REPOSITORY</span>
-              </a>
+              </InteractiveButton>
             )}
           </div>
 

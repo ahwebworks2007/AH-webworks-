@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { usePortfolio } from '@/src/context/PortfolioContext';
+import { InteractiveButton } from './ui/InteractiveButton';
 
 interface HeroProps {
   onViewWork: () => void;
@@ -43,21 +44,31 @@ export const Hero = ({ onViewWork, onStartProject }: HeroProps) => {
 
         {/* Action buttons fitting completely on small mobile screens */}
         <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full sm:w-auto max-w-xs sm:max-w-none">
-          <button
+          <InteractiveButton
             onClick={onViewWork}
-            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold tracking-wide uppercase text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-lg shadow-lg shadow-amber-400/20 transition-all duration-200 flex items-center justify-center gap-2 active:scale-95 group cursor-pointer whitespace-nowrap"
+            magnetic={true}
+            magneticStrength={0.18}
+            ripple={true}
+            rippleVariant="dark"
+            glowEffect={true}
+            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold tracking-wide uppercase text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-lg shadow-lg shadow-amber-400/20 hover:shadow-xl hover:shadow-amber-400/30 hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer whitespace-nowrap"
           >
             <span>VIEW OUR WORK</span>
             <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-          </button>
+          </InteractiveButton>
 
-          <button
+          <InteractiveButton
             onClick={onStartProject}
-            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold tracking-wide uppercase text-white bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 active:scale-95 cursor-pointer whitespace-nowrap"
+            magnetic={true}
+            magneticStrength={0.18}
+            ripple={true}
+            rippleVariant="amber"
+            glowEffect={false}
+            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold tracking-wide uppercase text-white bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 hover:shadow-lg hover:shadow-zinc-900/50 hover:-translate-y-0.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
           >
             <span>START A PROJECT</span>
             <ArrowUpRight className="w-4 h-4 text-amber-400" />
-          </button>
+          </InteractiveButton>
         </div>
 
         {/* Editorial trust markers */}

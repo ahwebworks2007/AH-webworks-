@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ArrowUpRight, ExternalLink, Globe, Eye } from 'lucide-react';
 import { usePortfolio } from '@/src/context/PortfolioContext';
 import { Project } from '@/src/data/portfolioData';
+import { InteractiveButton } from './ui/InteractiveButton';
 
 interface FeaturedWorkProps {
   onOpenCaseStudy: (project: Project) => void;
@@ -102,14 +103,18 @@ export const FeaturedWork = ({ onOpenCaseStudy }: FeaturedWorkProps) => {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                      <button
+                      <InteractiveButton
                         type="button"
+                        magnetic={true}
+                        magneticStrength={0.15}
+                        ripple={true}
+                        rippleVariant="dark"
                         onClick={() => onOpenCaseStudy(project)}
-                        className="px-4 py-2 text-xs font-semibold text-zinc-950 bg-white rounded-lg shadow-lg hover:bg-zinc-200 transition-colors flex items-center gap-2"
+                        className="px-4 py-2 text-xs font-semibold text-zinc-950 bg-white hover:bg-zinc-100 rounded-lg shadow-lg hover:shadow-white/20 transition-all duration-200 flex items-center gap-2 cursor-pointer"
                       >
                         <Eye className="w-3.5 h-3.5" />
                         <span>Inspect Case Study</span>
-                      </button>
+                      </InteractiveButton>
                     </div>
                   </div>
                 </div>
@@ -176,24 +181,34 @@ export const FeaturedWork = ({ onOpenCaseStudy }: FeaturedWorkProps) => {
 
                 {/* Actions */}
                 <div className="mt-8 pt-6 border-t border-zinc-800/80 flex flex-wrap items-center gap-3">
-                  <a
+                  <InteractiveButton
+                    as="a"
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-colors shadow-md shadow-amber-400/10 active:scale-95"
+                    magnetic={true}
+                    magneticStrength={0.15}
+                    ripple={true}
+                    rippleVariant="dark"
+                    glowEffect={true}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-all duration-200 shadow-md shadow-amber-400/10 hover:shadow-lg hover:shadow-amber-400/20 hover:-translate-y-0.5 cursor-pointer"
                   >
                     <span>VIEW PROJECT</span>
                     <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
+                  </InteractiveButton>
 
-                  <button
+                  <InteractiveButton
                     type="button"
+                    magnetic={true}
+                    magneticStrength={0.15}
+                    ripple={true}
+                    rippleVariant="amber"
                     onClick={() => onOpenCaseStudy(project)}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-zinc-200 bg-zinc-800/90 hover:bg-zinc-700 rounded-lg transition-colors border border-zinc-700/60 active:scale-95"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-zinc-200 bg-zinc-800/90 hover:bg-zinc-700 hover:text-white rounded-lg transition-all duration-200 border border-zinc-700/60 hover:border-zinc-600 hover:shadow-md hover:shadow-zinc-900/50 hover:-translate-y-0.5 cursor-pointer"
                   >
                     <span>CASE STUDY</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
-                  </button>
+                  </InteractiveButton>
                 </div>
               </div>
             </div>

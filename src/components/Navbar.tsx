@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight, MessageSquare, Shield } from 'lucide-react';
+import { Menu, X, MessageSquare, Shield } from 'lucide-react';
 import { usePortfolio } from '@/src/context/PortfolioContext';
+import { InteractiveButton } from './ui/InteractiveButton';
+import { LetsTalkExpandable } from './ui/LetsTalkExpandable';
 
 interface NavbarProps {
   onStartProject: () => void;
@@ -98,28 +100,29 @@ export const Navbar = ({ onStartProject, onOpenAdmin }: NavbarProps) => {
 
         {/* Zone 3: Primary Action & Admin Button & Mobile Toggle */}
         <div className="flex items-center gap-2.5">
-          {/* Admin Button */}
+          {/* Admin Button with Magnetic & Ripple */}
           {onOpenAdmin && (
-            <button
+            <InteractiveButton
               type="button"
+              magnetic={true}
+              magneticStrength={0.15}
+              ripple={true}
+              rippleVariant="amber"
               onClick={onOpenAdmin}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-xs font-mono text-zinc-300 hover:text-amber-400 transition-all active:scale-95 shadow-sm cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-xs font-mono text-zinc-300 hover:text-amber-400 transition-all shadow-sm cursor-pointer"
               title="Studio Admin Portal"
               aria-label="Admin Portal"
             >
               <Shield className="w-3.5 h-3.5 text-amber-400" />
               <span className="hidden sm:inline">Admin</span>
-            </button>
+            </InteractiveButton>
           )}
 
-          {/* Let's Talk CTA */}
-          <button
-            onClick={onStartProject}
-            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-zinc-950 bg-white rounded-lg hover:bg-zinc-200 transition-all hover:shadow-lg hover:shadow-white/10 active:scale-95 whitespace-nowrap cursor-pointer"
-          >
-            <span>Let's Talk</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </button>
+          {/* Expandable Interactive Let's Talk CTA */}
+          <LetsTalkExpandable
+            onStartProject={onStartProject}
+            className="hidden sm:inline-flex"
+          />
 
           {/* Mobile hamburger button */}
           <button
@@ -151,19 +154,23 @@ export const Navbar = ({ onStartProject, onOpenAdmin }: NavbarProps) => {
           </div>
 
           <div className="pt-3 border-t border-zinc-900 flex flex-col gap-2">
-            <button
+            <InteractiveButton
+              ripple={true}
+              rippleVariant="dark"
               onClick={() => {
                 setMobileMenuOpen(false);
                 onStartProject();
               }}
-              className="w-full py-3 px-4 text-center text-sm font-semibold text-zinc-950 bg-amber-400 rounded-lg hover:bg-amber-300 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3 px-4 text-center text-sm font-semibold text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-amber-400/10"
             >
               <MessageSquare className="w-4 h-4" />
               <span>Start a Project</span>
-            </button>
+            </InteractiveButton>
 
             {onOpenAdmin && (
-              <button
+              <InteractiveButton
+                ripple={true}
+                rippleVariant="amber"
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenAdmin();
@@ -172,7 +179,7 @@ export const Navbar = ({ onStartProject, onOpenAdmin }: NavbarProps) => {
               >
                 <Shield className="w-3.5 h-3.5 text-amber-400" />
                 <span>Admin Portal</span>
-              </button>
+              </InteractiveButton>
             )}
           </div>
         </div>

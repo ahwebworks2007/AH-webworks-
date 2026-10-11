@@ -1,6 +1,7 @@
 import { useState, useId } from 'react';
 import { Mail, MessageCircle, Instagram, Send, CheckCircle2, Copy, Check, ArrowUpRight } from 'lucide-react';
 import { usePortfolio } from '@/src/context/PortfolioContext';
+import { InteractiveButton, ButtonStatus } from './ui/InteractiveButton';
 
 interface ContactProps {
   preselectedService?: string;
@@ -25,6 +26,7 @@ export const Contact = ({ preselectedService }: ContactProps) => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<ButtonStatus>('idle');
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   // Dynamically derive project types from data.services
@@ -41,38 +43,55 @@ export const Contact = ({ preselectedService }: ContactProps) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitStatus === 'loading') return;
     if (!formData.name.trim() || !formData.email.trim()) return;
 
-    // Save inquiry to context / local storage database
-    addInquiry({
-      name: formData.name.trim(),
-      email: formData.email.trim(),
-      phone: formData.phone.trim(),
-      businessName: formData.businessName.trim(),
-      projectType: formData.projectType,
-      message: formData.message.trim(),
-    });
+    setSubmitStatus('loading');
 
-    // Build mailto query for client convenience
-    const subject = encodeURIComponent(
-      `Project Inquiry: ${formData.projectType} for ${formData.businessName || formData.name}`
-    );
-    const body = encodeURIComponent(
-      `Hello Hamdan & Ahad (AH Productions),\n\n` +
-        `Name: ${formData.name}\n` +
-        `Email: ${formData.email}\n` +
-        `Phone: ${formData.phone || 'N/A'}\n` +
-        `Business: ${formData.businessName || 'N/A'}\n` +
-        `Project Type: ${formData.projectType}\n\n` +
-        `Message / Project Details:\n${formData.message}\n`
-    );
+    try {
+      // Save inquiry to context / local storage database
+      await addInquiry({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        businessName: formData.businessName.trim(),
+        projectType: formData.projectType,
+        message: formData.message.trim(),
+      });
 
-    setSubmitted(true);
+      // Smooth button morph into success state
+      setSubmitStatus('success');
 
-    // Open user's email client
-    window.location.href = `mailto:${data.contact.email}?subject=${subject}&body=${body}`;
+      // Build mailto query for client convenience
+      const subject = encodeURIComponent(
+        `Project Inquiry: ${formData.projectType} for ${formData.businessName || formData.name}`
+      );
+      const body = encodeURIComponent(
+        `Hello Hamdan & Ahad (AH Productions),\n\n` +
+          `Name: ${formData.name}\n` +
+          `Email: ${formData.email}\n` +
+          `Phone: ${formData.phone || 'N/A'}\n` +
+          `Business: ${formData.businessName || 'N/A'}\n` +
+          `Project Type: ${formData.projectType}\n\n` +
+          `Message / Project Details:\n${formData.message}\n`
+      );
+
+      // Allow user to witness the satisfying button morph transition before showing confirmation
+      setTimeout(() => {
+        setSubmitted(true);
+        setSubmitStatus('idle');
+        // Open user's email client
+        window.location.href = `mailto:${data.contact.email}?subject=${subject}&body=${body}`;
+      }, 1100);
+    } catch (err) {
+      console.error('Failed to submit inquiry:', err);
+      setSubmitStatus('error');
+      setTimeout(() => {
+        setSubmitStatus('idle');
+      }, 3000);
+    }
   };
 
   const handleCopyEmail = () => {
@@ -154,15 +173,17 @@ export const Contact = ({ preselectedService }: ContactProps) => {
                     </a>
                   </div>
                 </div>
-                <button
+                <InteractiveButton
                   type="button"
+                  ripple={true}
+                  rippleVariant="amber"
                   onClick={handleCopyEmail}
-                  className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-colors shrink-0"
+                  className="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-colors shrink-0 cursor-pointer"
                   title="Copy email address"
                   aria-label="Copy email address"
                 >
                   {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                </button>
+                </InteractiveButton>
               </div>
 
               {/* Instagram Card */}
@@ -219,22 +240,29 @@ export const Contact = ({ preselectedService }: ContactProps) => {
                     Your brief has been logged in our system. You can also send this directly via WhatsApp for an immediate response from Hamdan & Ahad.
                   </p>
                   <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-                    <a
+                    <InteractiveButton
+                      as="a"
                       href={whatsappInquiryUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 text-xs font-semibold uppercase tracking-wider transition-colors inline-flex items-center gap-2"
+                      magnetic={true}
+                      magneticStrength={0.2}
+                      ripple={true}
+                      rippleVariant="dark"
+                      className="px-6 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 text-xs font-semibold uppercase tracking-wider transition-colors inline-flex items-center gap-2 cursor-pointer shadow-lg shadow-emerald-500/20"
                     >
                       <MessageCircle className="w-4 h-4" />
                       <span>Send on WhatsApp</span>
-                    </a>
-                    <button
+                    </InteractiveButton>
+                    <InteractiveButton
                       type="button"
+                      ripple={true}
+                      rippleVariant="amber"
                       onClick={() => setSubmitted(false)}
-                      className="px-5 py-3 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold transition-colors"
+                      className="px-5 py-3 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold transition-colors cursor-pointer"
                     >
                       Submit Another
-                    </button>
+                    </InteractiveButton>
                   </div>
                 </div>
               ) : (
@@ -346,14 +374,23 @@ export const Contact = ({ preselectedService }: ContactProps) => {
                     />
                   </div>
 
-                  {/* Submit CTA */}
-                  <button
+                  {/* Submit CTA with smooth morphing animation and ripple */}
+                  <InteractiveButton
                     type="submit"
-                    className="w-full py-4 px-6 text-xs sm:text-sm font-semibold uppercase tracking-wider text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-all duration-200 shadow-lg shadow-amber-400/20 flex items-center justify-center gap-2 active:scale-95"
+                    status={submitStatus}
+                    loadingText="Sending Project Inquiry..."
+                    successText="Inquiry Sent & Logged ✓"
+                    errorText="Failed to Submit — Try WhatsApp"
+                    magnetic={true}
+                    magneticStrength={0.15}
+                    ripple={true}
+                    rippleVariant="dark"
+                    glowEffect={true}
+                    className="w-full py-4 px-6 text-xs sm:text-sm font-semibold uppercase tracking-wider text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-all duration-200 shadow-lg shadow-amber-400/20 hover:shadow-xl hover:shadow-amber-400/30 flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <span>SEND PROJECT INQUIRY</span>
                     <Send className="w-4 h-4" />
-                  </button>
+                  </InteractiveButton>
                 </form>
               )}
             </div>

@@ -1,5 +1,6 @@
 import { MessageCircle, ArrowUpRight } from 'lucide-react';
 import { usePortfolio } from '@/src/context/PortfolioContext';
+import { InteractiveButton } from './ui/InteractiveButton';
 
 interface ClientCtaProps {
   onStartProject: () => void;
@@ -33,24 +34,34 @@ export const ClientCta = ({ onStartProject }: ClientCtaProps) => {
             </p>
 
             <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full sm:w-auto max-w-xs sm:max-w-none">
-              <button
+              <InteractiveButton
                 type="button"
+                magnetic={true}
+                magneticStrength={0.2}
+                ripple={true}
+                rippleVariant="dark"
+                glowEffect={true}
                 onClick={onStartProject}
-                className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold uppercase tracking-wider text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-xl shadow-lg shadow-amber-400/20 transition-all duration-200 flex items-center justify-center gap-2 active:scale-95 cursor-pointer whitespace-nowrap"
+                className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold uppercase tracking-wider text-zinc-950 bg-amber-400 hover:bg-amber-300 rounded-xl shadow-lg shadow-amber-400/20 hover:shadow-xl hover:shadow-amber-400/30 hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
               >
                 <span>START A PROJECT</span>
                 <ArrowUpRight className="w-4 h-4" />
-              </button>
+              </InteractiveButton>
 
-              <a
+              <InteractiveButton
+                as="a"
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 active:scale-95 cursor-pointer whitespace-nowrap"
+                magnetic={true}
+                magneticStrength={0.2}
+                ripple={true}
+                rippleVariant="amber"
+                className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold uppercase tracking-wider text-white bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-zinc-600 rounded-xl hover:shadow-lg hover:shadow-zinc-900/50 hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
               >
                 <MessageCircle className="w-4 h-4 text-emerald-400" />
                 <span>WHATSAPP US</span>
-              </a>
+              </InteractiveButton>
             </div>
 
             <div className="mt-8 text-xs font-mono text-zinc-400 flex items-center gap-2">
